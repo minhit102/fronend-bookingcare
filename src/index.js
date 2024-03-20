@@ -2,13 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Login from './containers/Auth/Login';
+import Login from './containers/Auth/Section/Login/Login';
 import App from './App'
-
+import store from './Store/store'
+import { Provider } from 'react-redux'
+import HomePage from './containers/Auth/Section/HomePage'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Login/>
-  //<App/>
+  <HomePage/> 
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -2,6 +2,7 @@ import React from 'react';
 import './Login.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { handleLoginAPI } from './userService';
 
 
 class Login extends React.Component {
@@ -26,14 +27,40 @@ class Login extends React.Component {
         })
     }
 
-    handlLogin = () => {
-        console.log('Đoi tuong : ')
-        console.log(this.state)
+    handlLogin = async () => {
+        this.setState({
+            errMessage: ''
+        });
+
+        try {
+            const dt  = await handleLoginAPI(this.state.username, this.state.password);
+            console.log(dt.data.errCode)
+            if(dt && dt.data.errCode !== 1){
+                this.setState({
+                    errMessage: dt.data.message
+                });
+            }
+            else {
+                this.setState({
+                    errMessage: dt.data.message
+                });
+            }
+            
+        }
+        catch (error) {
+            if (error.response) {
+                if (error.response.data) {
+                    this.setState({
+                        errMessage: error.response.data.message
+                    });
+                }
+            }
+        }
     }
     handlShowPw = () => {
         this.setState({
             isShowPw: !this.state.isShowPw, // Toggle isShowPw
-          });
+        });
     }
 
     render() {
@@ -42,8 +69,9 @@ class Login extends React.Component {
                 <div className="login-container">
                     <div className="login-content">
                         <div className="col-12 text-login">Login</div>
+                        <div className="col-12 text-login">{this.state.errMessage}</div>
                         <div className="col-12 form-group">
-                            <lable>Username</lable>
+                            <label>Username</label>
                             <input type="text"
                                 className="form-control"
                                 placeholder="Enter your username "
@@ -52,23 +80,24 @@ class Login extends React.Component {
                             ></input>
                         </div>
                         <div className="col-12 form-group" src="https://kit.fontawesome.com/a076d05399.js">
-                            <lable>Passwword</lable>
+                            <label>Passwword</label>
                             <div className="pass-eye">
-                                <input 
+                                <input
                                     className="form-control"
-                                    type={this.state.isShowPw? 'text' : 'password'}
-                                    placeholder="Enter your paswword "
+                                    type={this.state.isShowPw ? 'text' : 'password'}
+                                    placeholder="Enter your password "
                                     value={this.state.password}
                                     onChange={(event) => this.handleOnChangeInputPassWord(event)}>
                                 </input>
-                                
+
                                 <span onClick={() => {
                                     this.handlShowPw();
                                 }} >
-                                    <i class={this.state.isShowPw? "fas fa-eye-slash":"far fa-eye"  }></i>
+                                    <i className={this.state.isShowPw ? "fas fa-eye-slash" : "far fa-eye"}></i>
                                 </span>
                             </div>
                         </div>
+                        <div className="col-12 " style={{color: "red"}} >{this.state.errMessage}</div>
                         <div className="col-12 ">
                             <button className="btn" onClick={this.handlLogin} >Login</button>
                         </div>
