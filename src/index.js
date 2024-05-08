@@ -11,6 +11,7 @@ import HomePage from './containers/Auth/Section/HomePage'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
+    <Login/>
     <HomePage/>
   </Provider>,
 );
