@@ -1,6 +1,9 @@
 import React, { Component } from "react"
-//import {connect} from 'react-redux'
 import HeaderHome from './HomeHeader'
+import { connect } from 'react-redux'
+import Specialized from './Specialized'
+import SpecialDoctor from './SpecialDoctor'
+import MedicalFacility from './MedicalFacility';
 
 class HomePage extends Component {
     render() {
@@ -8,23 +11,25 @@ class HomePage extends Component {
             <React.Fragment>
                 <div>
                     <HeaderHome />
+                    <Specialized />
+                    <MedicalFacility />
+                    <SpecialDoctor />
                 </div>
+                <div style={{ height: '500px' }}>Minh</div>
 
             </React.Fragment>
         )
     }
 }
 
-/*const mapStateToProps = state => {
-    return{
-        isLoggedIn : state.user.isLoggedIn 
-    };
-}
-const mapDispatchToProps = dispath=> {
+const mapStateToProps = state => {
     return {
-        
+
     };
 }
-export default  connect (mapStateToProps,mapDispatchToProps)(HomePage);*/
+const mapDispatchToProps = dispath => {
+    return {
 
-export default HomePage;
+    };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

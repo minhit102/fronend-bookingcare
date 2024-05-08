@@ -1,0 +1,18 @@
+/* styles.css */
+.slider-container {
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+  
+  .chill-item {
+    background-color: blue;
+    color: white; /* Màu chữ */
+    border: 2px solid green;
+    border-radius: 5px; /* Đường viền cong */
+    padding: 10px; /* Khoảng cách giữa nội dung và viền */
+    text-align: center; /* Căn giữa nội dung */
+  }
+  

@@ -3,6 +3,8 @@ import './Login.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { handleLoginAPI } from './userService';
+import { redirect } from 'react-router-dom';
+
 
 
 class Login extends React.Component {
@@ -12,6 +14,7 @@ class Login extends React.Component {
             username: '',
             password: '',
             isShowPw: false,
+            errCode : '1',
         }
     }
 
@@ -34,7 +37,7 @@ class Login extends React.Component {
 
         try {
             const dt  = await handleLoginAPI(this.state.username, this.state.password);
-            console.log(dt.data.errCode)
+            
             if(dt && dt.data.errCode !== 1){
                 this.setState({
                     errMessage: dt.data.message
@@ -45,6 +48,7 @@ class Login extends React.Component {
                     errMessage: dt.data.message
                 });
             }
+            
             
         }
         catch (error) {
@@ -108,7 +112,6 @@ class Login extends React.Component {
                 </div>
             </div>
         )
-
     }
 }
 export default Login;

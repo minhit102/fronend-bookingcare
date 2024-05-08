@@ -1,8 +1,18 @@
 import React, { Component } from "react"
-//import {connect} from 'react-redux'
-import "./HomeHeader.scss"
+import { LANGUAGES } from "../../../constant";
+import {connect} from 'react-redux';
+import "./HomeHeader.scss";
+import { changeLanguageApp } from "../../../Store/action/actionTypes";
+import { FormattedMessage } from "react-intl";
+
 
 class HeaderHome extends Component {
+
+    changeLanguage = (language)=>{
+        alert(this.props);
+      
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -14,7 +24,7 @@ class HeaderHome extends Component {
                         </div>
                         <div className="centerHeader-content">
                             <div className="content-chill">
-                                <span><b>Tất cả</b></span>
+                                <span><b>All </b></span>
                             </div>
                             <div className="content-chill">
                                 <span><b>Tại nhà</b></span>
@@ -39,6 +49,12 @@ class HeaderHome extends Component {
                                 <div className="ho-tro">
                                     <i class="fa-solid fa-headset"></i>
                                     <div >Hỗ Trợ</div>
+                                </div>
+                                <div className="ho-tro">
+                                    
+                                    <div className = "language-vn" ><span onClick={()=>{this.changeLanguage(LANGUAGES.VN)}}>VN</span></div>
+                            
+                                    <div className = "language-en"><span onClick={()=>{this.changeLanguage(LANGUAGES.EN)}}>EN</span></div>
                                 </div>
                             </div>
                         </div>
@@ -126,9 +142,10 @@ class HeaderHome extends Component {
     }
 }
 
-/**const mapStateToProps = state => {
+const mapStateToProps = state => {
     return{
-        isLoggedIn : state.user.isLoggedIn 
+        // : state.user.isLoggedIn,
+
     };
 }
 const mapDispatchToProps = dispath=> {
@@ -138,5 +155,5 @@ const mapDispatchToProps = dispath=> {
 }
 
 
-export default  connect (mapStateToProps,mapDispatchToProps)(HeaderHome);**/
-export default HeaderHome;
+export default  connect (mapStateToProps,mapDispatchToProps)(HeaderHome);
+//export default HeaderHome;
